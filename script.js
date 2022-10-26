@@ -24,11 +24,19 @@ function createColumns(columnNum) {
         for (let c = 0; c<columnNum; c++) {
             let cell = document.createElement('div');
             cell.setAttribute('class', 'cells');
+
+            cell.addEventListener('mouseover', function (e) {
+                e.target.style.background = 'black';
+            });
+
             rows[r].appendChild(cell);
             console.log(r+' '+c);
         }
     }
 }
+
+
+
 
 
 createGrid();
