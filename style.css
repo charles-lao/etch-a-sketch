@@ -1,0 +1,12 @@
+#container {
+    display: flex;
+}
+
+.rows {
+    flex: 1;
+}
+
+.cells {
+    border: 1px solid black;
+    aspect-ratio: 1 / 1;
+}
