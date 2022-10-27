@@ -25,23 +25,31 @@ function createRows(rowNum){
 }
 
 function createColumns(columnNum) {
+
     for (let r = 0; r < rowCount; r++) {
         for (let c = 0; c<columnNum; c++) {
+
             let cell = document.createElement('div');
             cell.setAttribute('class', 'cells');
+            cell.style.filter = 'brightness(100%)';
 
-            cell.addEventListener('mouseover', function (e) {
-                e.target.style.background = 'black';
+            cell.addEventListener('mouseover', () => {
+                changeCellColor(cell);
             });
 
             rows[r].appendChild(cell);
+
         }
     }
 }
 
 function changeSettings() {
-    rowCount = prompt('Input the dimensions of the grid: (default value is 16) ', 16);
+    rowCount = prompt('Input the dimensions of the grid:' 
+            +'(default value is 16) ', 16);
+
     columnCount = rowCount;
+
+    //clean grid
     removeAllChildNodes(gridContainer);
     createGrid();
 }
@@ -52,3 +60,22 @@ function removeAllChildNodes(parent) {
     }
 }
 
+function randomColor() {
+    return Math.floor(Math.random() * 255);
+}
+
+function changeCellColor(cell) {
+    cell.style.backgroundColor = 'rgba('+randomColor()+','
+            +randomColor()+','+randomColor()+')';
+
+    //dims the cell by 10% everytime the mouse hovers
+    let currBrightness = cell.style.filter;
+    currBrightness = currBrightness.replace(/\D/g, '');
+
+    if (currBrightness > 0) {
+        currBrightness -= 10;
+    }
+    
+    cell.style.filter = `brightness(${currBrightness}%)`;
+
+}
